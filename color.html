@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>말의 색</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: "Apple SD Gothic Neo", sans-serif;
+      background-color: #FFFFFF; /* 초기 배경 흰색 */
+      transition: background-color 0.6s ease;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 20px;
+    }
+
+    input {
+      font-size: 20px;
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      width: 240px;
+      text-align: center;
+    }
+
+    .word {
+      margin-top: 30px;
+      font-size: 48px;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      font-size: 20px;
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45A049;
+    }
+  </style>
+</head>
+<body>
+  <h1>형용사를 입력하세요</h1>
+  <input id="wordInput" placeholder="예: 따뜻한" />
+  <div class="word" id="wordDisplay"></div>
+  <button id="colorBtn">클릭</button>
+
+  <script>
+    const adjectiveColors = {
+      "따뜻한": "#FFB347",
+      "포근한": "#FFDAB9",
+      "아늑한": "#FFCC80",
+      "온화한": "#FFE0B2",
+      "다정한": "#F8BBD0",
+      "감미로운": "#F48FB1",
+      "말랑한": "#FCE4EC",
+      "차가운": "#4A90E2",
+      "시원한": "#81D4FA",
+      "냉정한": "#546E7A",
+      "냉랭한": "#455A64",
+      "서늘한": "#90CAF9",
+      "담담한": "#B0BEC5",
+      "밝은": "#FFF176",
+      "환한": "#FFEE58",
+      "화사한": "#FFF59D",
+      "명랑한": "#FFD54F",
+      "경쾌한": "#FFCA28",
+      "생기있는": "#C5E1A5",
+      "상쾌한": "#AED581",
+      "어두운": "#2C2C2C",
+      "칙칙한": "#616161",
+      "침울한": "#424242",
+      "음산한": "#263238",
+      "그늘진": "#37474F",
+      "무거운": "#212121",
+      "부드러운": "#F8BBD0",
+      "연한": "#E1F5FE",
+      "은은한": "#F3E5F5",
+      "여린": "#FCE4EC",
+      "소프트한": "#E8EAF6",
+      "섬세한": "#F5F5F5",
+      "강렬한": "#E53935",
+      "선명한": "#F44336",
+      "진한": "#D32F2F",
+      "강한": "#C62828",
+      "화려한": "#EC407A",
+      "자극적인": "#B71C1C",
+      "눈에띄는": "#FF1744",
+      "차분한": "#A5D6A7",
+      "안정적인": "#81C784",
+      "편안한": "#C8E6C9",
+      "잔잔한": "#AED581",
+      "고요한": "#9CCC65",
+      "평온한": "#B2DFDB",
+      "느긋한": "#DCEDC8",
+      "우울한": "#5C6BC0",
+      "쓸쓸한": "#7986CB",
+      "처연한": "#9FA8DA",
+      "무기력한": "#90A4AE",
+      "가라앉은": "#607D8B",
+      "기쁜": "#FFD54F",
+      "즐거운": "#FFCA28",
+      "행복한": "#FFEB3B",
+      "유쾌한": "#FFC107",
+      "활기찬": "#FFB300",
+      "슬픈": "rgba(98, 92, 145, 1)",
+      "애잔한": "#8E99C7",
+      "서글픈": "#7E57C2",
+      "처량한": "#6A1B9A",
+      "비통한": "#4A148C",
+      "신비로운": "#7E57C2",
+      "몽환적인": "#9575CD",
+      "오묘한": "#B39DDB",
+      "환상적인": "#CE93D8",
+      "비밀스러운": "#512DA8",
+      "고급스러운": "#1C1C1C",
+      "세련된": "#212121",
+      "묵직한": "#263238",
+      "중후한": "#37474F",
+      "클래식한": "#3E2723",
+      "정제된": "#424242",
+      "자연스러운": "#4CAF50",
+      "신선한": "#66BB6A",
+      "맑은": "#B2EBF2",
+      "건강한": "#43A047",
+      "청량한": "#4DD0E1",
+      "인공적인": "#B0BEC5",
+      "미래적인": "#00B0FF",
+      "메탈릭한": "#90A4AE",
+      "디지털적인": "#00E5FF",
+      "기계적인": "#78909C"
+    };
+
+    const input = document.getElementById("wordInput");
+    const display = document.getElementById("wordDisplay");
+    const button = document.getElementById("colorBtn");
+
+    function applyColor() {
+      const word = input.value.trim();
+
+      if (!word) {
+        document.body.style.backgroundColor = "#FFFFFF";
+        display.textContent = "";
+        return;
+      }
+
+      if (adjectiveColors[word]) {
+        document.body.style.backgroundColor = adjectiveColors[word];
+        display.textContent = word;
+      } else {
+        document.body.style.backgroundColor = "#FFFFFF";
+        display.textContent = "해당 형용사가 없습니다";
+      }
+    }
+
+    // 버튼 클릭 이벤트
+    button.addEventListener("click", applyColor);
+
+    // 엔터 키 이벤트
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        applyColor();
+      }
+    });
+  </script>
+</body>
+</html>
